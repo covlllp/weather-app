@@ -7,11 +7,13 @@ export default class Background extends React.Component {
     super(props);
     this.state = {
       flickrGroupId: null,
+      imageSrc: null,
     };
+    this.getImage = this.getImage.bind(this);
   }
 
   componentDidMount() {
-    this.getProjectWeatherGroupId();
+    this.getProjectWeatherGroupId().then(this.getImage);
   }
 
   getProjectWeatherGroupId() {
@@ -20,13 +22,25 @@ export default class Background extends React.Component {
     });
   }
 
-  render() {
-    return (
-      <div>
-        {JSON.stringify(this.props)}
-        {JSON.stringify(this.state)}
-      </div>
-    );
+  getImage() {
+    const { location, weather } = this.props;
+    const tags = [weather, 'day'];
+    FlickrUtils.getRandomImageUrl(this.state.flickrGroupId, tags).then((imageUrl) => {
+      this.setState({ imageSrc: imageUrl });
+    });
   }
 
+  render() {
+    return (
+      <img
+        src={this.state.imageSrc}
+        alt="background"
+      />
+    );
+  }
 }
+
+Background.propTypes = {
+  weather: React.PropTypes.string,
+  location: React.PropTypes.string,
+};

@@ -12,9 +12,9 @@ function buildUrl(options) {
   if (!urlOptions.api_key) {
     urlOptions.api_key = keys.FLICKR_KEY;
   }
-  for (let key in urlOptions) {
-    url = url + '&' + key + '=' + urlOptions[key];
-  }
+  Object.keys(urlOptions).forEach((key) => {
+    url = `${url}&${key}=${urlOptions[key]}`;
+  });
   return url.replace('&', '?');
 }
 
@@ -34,3 +34,27 @@ export function getGroupId(groupName) {
     return groups[0].nsid;
   });
 }
+
+export function getImageUrl(photo) {
+  const { id, secret, server, farm } = photo;
+  return `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_b.jpg`;
+}
+
+export function getRandomImageUrl(groupId, tags) {
+  const joinedTags = tags.join();
+  const urlOptions = {
+    method: 'flickr.photos.search',
+    tags: joinedTags,
+    tag_mode: 'all',
+    group_id: groupId,
+  };
+  const url = buildUrl(urlOptions);
+  return ajax(url).then((response) => {
+    const photos = eval(response).photos.photo;
+    const randomIndex = Math.floor(Math.random() * photos.length);
+    const photo = photos[randomIndex];
+    console.log(photos.length);
+    return getImageUrl(photo);
+  });
+}
+
