@@ -6,6 +6,8 @@
   "rules": {
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": 0,
-    "react/jsx-filename-extension": 0
+    "react/jsx-filename-extension": 0,
+    "no-unused-vars": ["error", { "varsIgnorePattern": "jsonFlickrApi" }],
+    "no-eval": 0
   }
 }

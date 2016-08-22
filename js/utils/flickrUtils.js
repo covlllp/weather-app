@@ -41,10 +41,10 @@ export function getImageUrl(photo) {
 }
 
 export function getRandomImageUrl(groupId, tags) {
-  const joinedTags = tags.join();
+  const joinedTags = tags.join(' ');
   const urlOptions = {
     method: 'flickr.photos.search',
-    tags: joinedTags,
+    text: joinedTags,
     tag_mode: 'all',
     group_id: groupId,
   };
@@ -53,7 +53,6 @@ export function getRandomImageUrl(groupId, tags) {
     const photos = eval(response).photos.photo;
     const randomIndex = Math.floor(Math.random() * photos.length);
     const photo = photos[randomIndex];
-    console.log(photos.length);
     return getImageUrl(photo);
   });
 }
