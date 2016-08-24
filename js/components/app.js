@@ -31,6 +31,7 @@ export default class App extends React.Component {
         PonchoUtils.getSeason(),
         PonchoUtils.getTimeOfDay(),
       ];
+      console.log(imageTags);
       return FlickrUtils.getRandomImageUrl(groupId, imageTags);
     }).then((imageSrc) => {
       this.setState({ backgroundImageSrc: imageSrc });

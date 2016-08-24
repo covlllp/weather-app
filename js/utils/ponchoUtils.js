@@ -80,10 +80,12 @@ export function getTimeOfDay() {
 }
 
 export function getDayOrNight() {
-  return getTimeOfDay() == 'night' ? 'night' : 'day';
+  return getTimeOfDay() === 'night' ? 'night' : 'day';
 }
 
 const IconTimeMap = {
+  clear_day: 'weather-clear',
+  'clear-night_night': 'weather-clear-night',
   'light-rain_day': 'weather-drizzle-day',
   'light-rain_night': 'weather-drizzle-night',
 };
@@ -91,6 +93,5 @@ const IconTimeMap = {
 export function getIconSrc(icon) {
   const dayOrNight = getDayOrNight();
   const iconTime = `${icon}_${dayOrNight}`;
-
   return `images/weather/${IconTimeMap[iconTime]}.png`;
 }

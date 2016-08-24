@@ -1,8 +1,16 @@
 import React from 'react';
 
 import { getIconSrc } from 'js/utils/ponchoUtils';
+import { getTimeString } from 'js/utils/timeUtils';
 
 export default class Weather extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      time: new Date(),
+    };
+  }
+
   renderIcon() {
     const imageSrc = getIconSrc(this.props.icon);
     return (
@@ -13,18 +21,25 @@ export default class Weather extends React.Component {
   }
 
   renderInfo() {
+    const currentTemp = `${this.props.currentTemp}\u00B0`;
     return (
-      <div className="weather__info">
-        {this.props.currentTemp}
-        {this.props.maxTemp}
-        {this.props.minTemp}
-        {this.props.precipProb}
+      <div className="weather__info info">
+        <div className="info__time">
+          {getTimeString(this.state.time)}
+        </div>
+        <div className="info__temp">
+          {currentTemp}
+        </div>
+        <div className="info__more">
+          {this.props.maxTemp}
+          {this.props.minTemp}
+          {this.props.precipProb}
+        </div>
       </div>
     );
   }
 
   renderWeather() {
-    const imageSrc = getIconSrc(this.props.icon);
     return (
       <div className="weather">
         {this.renderIcon()}
