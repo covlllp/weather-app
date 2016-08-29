@@ -20,6 +20,25 @@ export default class Weather extends React.Component {
     );
   }
 
+  renderMoreInfo() {
+    return (
+      <div className="info__more">
+        <span className="info__high">
+          <i className="fa fa-long-arrow-up" aria-hidden="true" />
+          {this.props.maxTemp}
+        </span>
+        <span className="info__low">
+          <i className="fa fa-long-arrow-down" aria-hidden="true" />
+          {this.props.minTemp}
+        </span>
+        <span className="info__prob">
+          <i className="fa fa-tint" aria-hidden="true" />
+          {this.props.precipProb}
+        </span>
+      </div>
+    );
+  }
+
   renderInfo() {
     const currentTemp = `${this.props.currentTemp}\u00B0`;
     return (
@@ -30,11 +49,7 @@ export default class Weather extends React.Component {
         <div className="info__temp">
           {currentTemp}
         </div>
-        <div className="info__more">
-          {this.props.maxTemp}
-          {this.props.minTemp}
-          {this.props.precipProb}
-        </div>
+        {this.renderMoreInfo()}
       </div>
     );
   }
@@ -49,9 +64,17 @@ export default class Weather extends React.Component {
   }
 
   renderPoncho() {
+    const { ponchoData } = this.props;
     return (
       <div className="poncho">
-        Poncho
+        <div className="poncho__header">
+          {ponchoData.subject}
+        </div>
+        <div className="poncho__body">
+          {ponchoData.opener}
+          {ponchoData.content}
+        </div>
+        <img src={ponchoData.media} alt="poncho-img" />
       </div>
     );
   }
