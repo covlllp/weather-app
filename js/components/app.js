@@ -1,6 +1,8 @@
 import React from 'react';
 
 import Weather from 'js/components/weather';
+import Poncho from 'js/components/poncho';
+import Time from 'js/components/time';
 import News from 'js/components/news';
 
 import * as FlickrUtils from 'js/utils/flickrUtils';
@@ -67,14 +69,18 @@ export default class App extends React.Component {
         style={this.getBackgroundStyle()}
         id="app"
       >
-        <Weather
-          ponchoData={ponchoData}
-          maxTemp={dayInfo.maxTemp}
-          minTemp={dayInfo.minTemp}
-          currentTemp={today.temp}
-          icon={today.icon}
-          precipProb={dayInfo.precipProb}
-        />
+        <div className="flex">
+          <Weather
+            ponchoData={ponchoData}
+            maxTemp={dayInfo.maxTemp}
+            minTemp={dayInfo.minTemp}
+            currentTemp={today.temp}
+            icon={today.icon}
+            precipProb={dayInfo.precipProb}
+          />
+          <Time />
+        </div>
+        <Poncho />
         <News />
       </div>
     );

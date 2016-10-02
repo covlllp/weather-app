@@ -27,12 +27,13 @@ body {
 
 .wrapper {
   padding: 20px;
+}
 
-  .container {
-    padding: 15px;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-  }
+.container {
+  margin: 20px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }
 
 .news {
@@ -44,6 +45,11 @@ body {
   &__icon {
     margin-right: 5px;
   }
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
 }
 
 .main {

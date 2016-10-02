@@ -81,11 +81,8 @@ export default class Weather extends React.Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <div className="main container">
-          {this.renderWeather()}
-          {this.renderPoncho()}
-        </div>
+      <div className="container">
+        {this.renderWeather()}
       </div>
     );
   }

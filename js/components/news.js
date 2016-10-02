@@ -45,10 +45,8 @@ export default class News extends React.Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <div className="news container">
-          {this.renderItems()}
-        </div>
+      <div className="news container">
+        {this.renderItems()}
       </div>
     );
   }
