@@ -80,7 +80,12 @@ export default class App extends React.Component {
           />
           <Time />
         </div>
-        <Poncho />
+        <Poncho
+          subject={ponchoData.subject}
+          opener={ponchoData.opener}
+          content={ponchoData.content}
+          media={ponchoData.media}
+        />
         <News />
       </div>
     );
