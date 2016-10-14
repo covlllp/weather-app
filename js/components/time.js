@@ -23,20 +23,33 @@ export default class Time extends React.Component {
     this.setState({ time: new Date() });
   }
 
-  render() {
+  renderDate() {
     const { time } = this.state;
-
     return (
-      <div className="container time">
-        <div className="time__week">
+      <div className="time__date">
+        <div className="week">
           {timeUtils.getDayOfWeek(time)}
         </div>
-        <div className="time__date">
+        <div className="date">
           {timeUtils.getDateString(time)}
         </div>
-        <div className="time__time">
-          {timeUtils.getTimeString(time)}
-        </div>
+      </div>
+    );
+  }
+
+  renderTime() {
+    return (
+      <div className="time__time font-large font-bold">
+        {timeUtils.getTimeString(this.state.time)}
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div className="container time">
+        {this.renderDate()}
+        {this.renderTime()}
       </div>
     );
   }

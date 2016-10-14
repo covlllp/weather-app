@@ -83,19 +83,28 @@ export function getDayOrNight() {
   return getTimeOfDay() === 'night' ? 'night' : 'day';
 }
 
-const IconTimeMap = {
-  clear_day: 'weather-clear',
-  'clear-night_night': 'weather-clear-night',
-  cloudy_night: 'weather-clouds-night',
-  cloudy_day: 'weather-clouds',
-  'partly-cloudy-day_day': 'weather-few-clouds',
-  'partly-cloudy_night': 'weather-few-clouds-night',
-  'light-rain_day': 'weather-drizzle-day',
-  'light-rain_night': 'weather-drizzle-night',
+const IconMap = {
+  clear: 'weather-clear',
+  'clear-night': 'weather-clear-night',
+  cloudy: 'weather-clouds',
+  'partly-cloudy-day': 'weather-few-clouds',
+  'partly-cloudy-night': 'weather-few-clouds-night',
+  'light-rain': 'weather-drizzle-day',
+  'light-rain-night': 'weather-drizzle-day',
 };
 
+// const IconTimeMap = {
+//   clear_day: 'weather-clear',
+//   'clear-night_night': 'weather-clear-night',
+//   cloudy_night: 'weather-clouds-night',
+//   cloudy_day: 'weather-clouds',
+//   'partly-cloudy-day_day': 'weather-few-clouds',
+//   'partly-cloudy-night_day': 'weather-few-clouds',
+//   'partly-cloudy_night': 'weather-few-clouds-night',
+//   'light-rain_day': 'weather-drizzle-day',
+//   'light-rain_night': 'weather-drizzle-night',
+// };
+
 export function getIconSrc(icon) {
-  const dayOrNight = getDayOrNight();
-  const iconTime = `${icon}_${dayOrNight}`;
-  return `images/weather/${IconTimeMap[iconTime]}.png`;
+  return `images/weather/${IconMap[icon]}.png`;
 }

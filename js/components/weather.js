@@ -1,39 +1,32 @@
 import React from 'react';
 
 import { getIconSrc } from 'js/utils/ponchoUtils';
-import { getTimeString } from 'js/utils/timeUtils';
 
 export default class Weather extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      time: new Date(),
-    };
+  getRainProbability() {
+    const rainPercentage = Math.round(this.props.precipProb * 100);
+    return `${rainPercentage}%`;
   }
 
   renderIcon() {
-    const imageSrc = getIconSrc(this.props.icon);
+    const { icon } = this.props;
+    if (!icon) return null;
+
     return (
       <div className="weather__icon">
-        <img src={imageSrc} alt={this.props.icon} />
+        <img src={getIconSrc(icon)} alt={icon} />
       </div>
     );
   }
 
-  renderMoreInfo() {
+  renderHighLow() {
     return (
-      <div className="info__more">
-        <span className="info__high">
-          <i className="fa fa-long-arrow-up" aria-hidden="true" />
+      <div className="info__high-low">
+        <span className="info__high font-bold">
           {this.props.maxTemp}
         </span>
         <span className="info__low">
-          <i className="fa fa-long-arrow-down" aria-hidden="true" />
           {this.props.minTemp}
-        </span>
-        <span className="info__prob">
-          <i className="fa fa-tint" aria-hidden="true" />
-          {this.props.precipProb}
         </span>
       </div>
     );
@@ -43,46 +36,26 @@ export default class Weather extends React.Component {
     const currentTemp = `${this.props.currentTemp}\u00B0`;
     return (
       <div className="weather__info info">
-        <div className="info__time">
-          {getTimeString(this.state.time)}
-        </div>
-        <div className="info__temp">
+        <div className="info__temp font-large font-bold">
           {currentTemp}
         </div>
-        {this.renderMoreInfo()}
-      </div>
-    );
-  }
-
-  renderWeather() {
-    return (
-      <div className="weather">
-        {this.renderIcon()}
-        {this.renderInfo()}
-      </div>
-    );
-  }
-
-  renderPoncho() {
-    const { ponchoData } = this.props;
-    return (
-      <div className="poncho">
-        <div className="poncho__header">
-          {ponchoData.subject}
+        {this.renderHighLow()}
+        <div className="info__rain">
+          <i className="fa fa-cloud" aria-hidden="true" />
+          <span className="info__prob">
+            {this.getRainProbability()}
+          </span>
         </div>
-        <div className="poncho__body">
-          {ponchoData.opener}
-          {ponchoData.content}
-        </div>
-        <img src={ponchoData.media} alt="poncho-img" />
       </div>
     );
   }
 
   render() {
+    if (!this.props.currentTemp) return null;
     return (
-      <div className="container">
-        {this.renderWeather()}
+      <div className="container weather flex">
+        {this.renderIcon()}
+        {this.renderInfo()}
       </div>
     );
   }
@@ -95,10 +68,4 @@ Weather.propTypes = {
   currentTemp: React.PropTypes.number,
   icon: React.PropTypes.string,
   precipProb: React.PropTypes.number,
-  ponchoData: React.PropTypes.shape({
-    subject: React.PropTypes.string,
-    opener: React.PropTypes.string,
-    content: React.PropTypes.string,
-    media: React.PropTypes.string,
-  }),
 };
