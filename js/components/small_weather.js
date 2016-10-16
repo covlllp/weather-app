@@ -1,12 +1,22 @@
 import React from 'react';
 
+import WeatherInfo from 'js/components/weather_info';
+
 export default class SmallWeather extends React.Component {
   renderDays() {
-    return <div />;
+    return this.props.days.map((day, index) => (
+      <WeatherInfo
+        time={day.time}
+        icon={day.icon}
+        maxTemp={day.maxTemp}
+        minTemp={day.minTemp}
+        precipProb={day.minTemp}
+        key={index}
+      />
+    ));
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="container future">
         {this.renderDays()}

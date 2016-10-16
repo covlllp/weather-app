@@ -45,6 +45,10 @@ const months = [
 ];
 
 export function getDayOfWeek(date) {
+  if (!(date instanceof Date)) {
+    const dateObj = new Date(date);
+    return daysOfWeek[dateObj.getDay()];
+  }
   return daysOfWeek[date.getDay()];
 }
 

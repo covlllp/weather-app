@@ -35,6 +35,7 @@ export function getInitialWeatherData() {
 
 export function getDailyWeatherData() {
   return getDailyPonchoData().then((dailyData) => dailyData.map((day) => ({
+    time: day.time,
     maxTemp: day.temp_max_f,
     minTemp: day.temp_min_f,
     icon: day.icon,

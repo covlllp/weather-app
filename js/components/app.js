@@ -60,10 +60,18 @@ export default class App extends React.Component {
     return {};
   }
 
+  getTodaySummary() {
+    if (this.state.days.length) return this.state.days[0];
+    return {};
+  }
+
+  getFutureDays() {
+    return this.state.days.slice(1, 5);
+  }
+
   render() {
-    let dayInfo = {};
-    if (this.state.days.length) dayInfo = this.state.days[0];
-    const { today, ponchoData, days } = this.state;
+    const { today, ponchoData } = this.state;
+    const todaySummary = this.getTodaySummary();
 
     return (
       <div
@@ -73,15 +81,15 @@ export default class App extends React.Component {
         <div className="flex">
           <Weather
             ponchoData={ponchoData}
-            maxTemp={dayInfo.maxTemp}
-            minTemp={dayInfo.minTemp}
+            maxTemp={todaySummary.maxTemp}
+            minTemp={todaySummary.minTemp}
             currentTemp={today.temp}
             icon={today.icon}
-            precipProb={dayInfo.precipProb}
+            precipProb={todaySummary.precipProb}
           />
           <Time />
         </div>
-        <SmallWeather days={days} />
+        <SmallWeather days={this.getFutureDays()} />
         <Poncho
           subject={ponchoData.subject}
           opener={ponchoData.opener}
