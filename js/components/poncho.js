@@ -1,27 +1,35 @@
 import React from 'react';
 
-function getImageTag(src) {
-  if (!src) return null;
-  return <img src={src} alt="poncho-img" />;
-}
+export default class Poncho extends React.Component {
+  getImageTag() {
+    const { media } = this.props;
+    if (!media) return null;
+    return (
+      <div className="poncho__media">
+        <img src={media} alt="poncho-img" className="poncho__img" />
+      </div>
+    );
+  }
 
-export default function Poncho(props) {
-  return (
-    <div className="container poncho">
-      <div className="poncho__header font-large font-bold">
-        {props.subject}
-      </div>
-      <div className="poncho__body">
-        <div className="poncho__opener">
-          {props.opener}
+  render() {
+    const { props } = this;
+    return (
+      <div className="container poncho">
+        <div className="poncho__header font-large font-bold">
+          {props.subject}
         </div>
-        <div className="poncho__content">
-          {props.content}
+        <div className="poncho__body">
+          <div className="poncho__opener">
+            {props.opener}
+          </div>
+          <div className="poncho__content">
+            {props.content}
+          </div>
         </div>
+        {this.getImageTag()}
       </div>
-      {getImageTag(props.media)}
-    </div>
-  );
+    );
+  }
 }
 
 Poncho.propTypes = {
@@ -30,3 +38,4 @@ Poncho.propTypes = {
   content: React.PropTypes.string,
   media: React.PropTypes.string,
 };
+

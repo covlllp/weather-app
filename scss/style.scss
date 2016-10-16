@@ -81,8 +81,16 @@ body {
     text-align: center;
   }
 
-  &__opener {
+  &__opener, &__content {
     padding-bottom: 15px;
+  }
+
+  &__media {
+    text-align: center;
+  }
+
+  &__img {
+    min-height: 350px;
   }
 }
 

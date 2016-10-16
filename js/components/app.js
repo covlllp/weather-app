@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Weather from 'js/components/weather';
+import SmallWeather from 'js/components/small_weather';
 import Poncho from 'js/components/poncho';
 import Time from 'js/components/time';
 // import News from 'js/components/news';
@@ -62,7 +63,7 @@ export default class App extends React.Component {
   render() {
     let dayInfo = {};
     if (this.state.days.length) dayInfo = this.state.days[0];
-    const { today, ponchoData } = this.state;
+    const { today, ponchoData, days } = this.state;
 
     return (
       <div
@@ -80,6 +81,7 @@ export default class App extends React.Component {
           />
           <Time />
         </div>
+        <SmallWeather days={days} />
         <Poncho
           subject={ponchoData.subject}
           opener={ponchoData.opener}

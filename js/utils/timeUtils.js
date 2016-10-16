@@ -1,6 +1,18 @@
+function addPrependingZeros(value, length) {
+  if (value.length < length) {
+    const numZeros = length - value.length;
+    let zeros = '';
+    for (let i = 0; i < numZeros; i++) {
+      zeros += '0';
+    }
+    return `${zeros}${value}`;
+  }
+  return value;
+}
+
 export function getTimeString(date) {
   let hour = date.getHours();
-  const minute = date.getMinutes();
+  const minute = addPrependingZeros(date.getMinutes(), 2);
   const amOrPm = hour > 12 ? 'pm' : 'am';
   hour %= 12;
 

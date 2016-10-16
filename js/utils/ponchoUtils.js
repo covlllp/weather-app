@@ -84,7 +84,7 @@ export function getDayOrNight() {
 }
 
 const IconMap = {
-  clear: 'weather-clear',
+  'clear-day': 'weather-clear',
   'clear-night': 'weather-clear-night',
   cloudy: 'weather-clouds',
   'partly-cloudy-day': 'weather-few-clouds',
