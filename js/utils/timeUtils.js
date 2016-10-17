@@ -1,23 +1,28 @@
-function addPrependingZeros(value, length) {
-  if (value.length < length) {
-    const numZeros = length - value.length;
-    let zeros = '';
-    for (let i = 0; i < numZeros; i++) {
-      zeros += '0';
-    }
-    return `${zeros}${value}`;
+function addPrependingZeros(value) {
+  if (value < 10) {
+    return `0${value}`;
   }
   return value;
 }
 
 export function getTimeString(date) {
   let hour = date.getHours();
-  const minute = addPrependingZeros(date.getMinutes(), 2);
+  const minute = addPrependingZeros(date.getMinutes());
   const amOrPm = hour > 12 ? 'pm' : 'am';
   hour %= 12;
 
   return `${hour}:${minute} ${amOrPm}`;
 }
+
+const shortDaysOfWeek = [
+  'Sun',
+  'Mon',
+  'Tues',
+  'Wed',
+  'Thurs',
+  'Fri',
+  'Sat',
+];
 
 const daysOfWeek = [
   'Sunday',
@@ -44,12 +49,13 @@ const months = [
   'December',
 ];
 
-export function getDayOfWeek(date) {
+export function getDayOfWeek(date, shorten = false) {
+  let dateObj = date;
   if (!(date instanceof Date)) {
-    const dateObj = new Date(date);
-    return daysOfWeek[dateObj.getDay()];
+    dateObj = new Date(date);
   }
-  return daysOfWeek[date.getDay()];
+  if (shorten) return shortDaysOfWeek[dateObj.getDay()];
+  return daysOfWeek[dateObj.getDay()];
 }
 
 export function getDateString(date) {

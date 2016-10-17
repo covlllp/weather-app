@@ -1,3 +1,5 @@
+$weather_width: 40%;
+
 html {
   box-sizing: border-box;
 }
@@ -54,6 +56,8 @@ body {
 }
 
 .weather {
+  width: $weather_width;
+
   .info {
     display: flex;
     flex-direction: column;
@@ -104,3 +108,20 @@ body {
     line-height: 1.3em;
   }
 }
+
+.future {
+  width: $weather_width;
+}
+
+.weather-info {
+  &__tow {
+    width: 20%;
+  }
+
+  &__icon {
+    .img {
+      height: 1em;
+    }
+  }
+}
+
