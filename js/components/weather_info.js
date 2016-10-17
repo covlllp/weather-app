@@ -54,7 +54,6 @@ export default class WeatherInfo extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="weather-info flex">
         {this.renderTimeOfWeek()}
