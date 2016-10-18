@@ -44,6 +44,10 @@ body {
   border-radius: 10px;
 }
 
+.precip-prob {
+  padding-left: 10px;
+}
+
 .news {
   &__item {
     font-size: 9pt;
@@ -66,10 +70,6 @@ body {
 
     &__high {
       padding-right: 20px;
-    }
-
-    &__prob {
-      padding-left: 10px;
     }
   }
 }
@@ -110,7 +110,7 @@ body {
 }
 
 .future {
-  width: $weather_width;
+  width: 57%;
 }
 
 .weather-info {

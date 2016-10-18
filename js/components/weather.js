@@ -41,8 +41,8 @@ export default class Weather extends React.Component {
         </div>
         {this.renderHighLow()}
         <div className="info__rain">
-          <i className="fa fa-cloud" aria-hidden="true" />
-          <span className="info__prob">
+          &#9730;
+          <span className="info__prob precip-prob">
             {this.getRainProbability()}
           </span>
         </div>

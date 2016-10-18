@@ -10,6 +10,7 @@ export function getTimeString(date) {
   const minute = addPrependingZeros(date.getMinutes());
   const amOrPm = hour > 12 ? 'pm' : 'am';
   hour %= 12;
+  if (!hour) hour = 12;
 
   return `${hour}:${minute} ${amOrPm}`;
 }
