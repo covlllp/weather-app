@@ -4,7 +4,6 @@ import Weather from 'js/components/weather';
 import SmallWeather from 'js/components/small_weather';
 import Poncho from 'js/components/poncho';
 import Time from 'js/components/time';
-// import News from 'js/components/news';
 
 import * as FlickrUtils from 'js/utils/flickrUtils';
 import * as PonchoUtils from 'js/utils/ponchoUtils';
@@ -19,9 +18,19 @@ export default class App extends React.Component {
       days: [],
       today: {},
     };
+    this.getData = this.getData.bind(this);
   }
 
   componentDidMount() {
+    this.getData();
+    this.interval = setInterval(this.getData, 60 * 60 * 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  getData() {
     this.getBackgroundSrc();
     this.getWeatherData();
   }
@@ -80,7 +89,6 @@ export default class App extends React.Component {
       >
         <div className="flex">
           <Weather
-            ponchoData={ponchoData}
             maxTemp={todaySummary.maxTemp}
             minTemp={todaySummary.minTemp}
             currentTemp={today.temp}
