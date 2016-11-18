@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack')
 
 var entryPath = './js/main.js';
 var jsPath = path.join(__dirname, 'js');
@@ -31,5 +32,12 @@ module.exports = {
         loaders: ['style', 'css', 'sass']
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
+  ]
 };
