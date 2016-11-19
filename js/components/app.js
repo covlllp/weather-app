@@ -2,6 +2,7 @@ import React from 'react';
 
 import Weather from 'js/components/weather';
 import SmallWeather from 'js/components/small_weather';
+import HourlyInfo from 'js/components/hourly_info';
 import Poncho from 'js/components/poncho';
 import Time from 'js/components/time';
 
@@ -16,7 +17,7 @@ export default class App extends React.Component {
       ponchoData: {},
       weather: null,
       days: [],
-      today: {},
+      today: [],
     };
     this.getData = this.getData.bind(this);
   }
@@ -56,8 +57,8 @@ export default class App extends React.Component {
     PonchoUtils.getDailyWeatherData().then((dailyWeatherData) => {
       this.setState({ days: dailyWeatherData });
     });
-    PonchoUtils.getCurrentWeather().then((currentData) => {
-      this.setState({ today: currentData });
+    PonchoUtils.getHourlyWeatherData().then((hourlyWeatherData) => {
+      this.setState({ today: hourlyWeatherData });
     });
   }
 
@@ -70,7 +71,17 @@ export default class App extends React.Component {
   }
 
   getTodaySummary() {
-    if (this.state.days.length) return this.state.days[0];
+    if (this.state.days.length && this.state.today.length) {
+      const dailyData = this.state.days[0];
+      const hourlyData = this.state.today[0];
+      return {
+        maxTemp: dailyData.maxTemp,
+        minTemp: dailyData.minTemp,
+        currentTemp: hourlyData.temp,
+        icon: hourlyData.icon,
+        precipProb: dailyData.precipProb,
+      };
+    }
     return {};
   }
 
@@ -91,12 +102,13 @@ export default class App extends React.Component {
           <Weather
             maxTemp={todaySummary.maxTemp}
             minTemp={todaySummary.minTemp}
-            currentTemp={today.temp}
-            icon={today.icon}
+            currentTemp={todaySummary.currentTemp}
+            icon={todaySummary.icon}
             precipProb={todaySummary.precipProb}
           />
           <Time />
         </div>
+        <HourlyInfo hourData={today} />
         <SmallWeather days={this.getFutureDays()} />
         <Poncho
           subject={ponchoData.subject}

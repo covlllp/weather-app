@@ -6,9 +6,14 @@ function addPrependingZeros(value) {
 }
 
 export function getTimeString(date) {
-  let hour = date.getHours();
-  const minute = addPrependingZeros(date.getMinutes());
-  const amOrPm = hour > 12 ? 'pm' : 'am';
+  let dateObj = date;
+  if (!(date instanceof Date)) {
+    dateObj = new Date(date);
+  }
+
+  let hour = dateObj.getHours();
+  const minute = addPrependingZeros(dateObj.getMinutes());
+  const amOrPm = hour >= 12 ? 'pm' : 'am';
   hour %= 12;
   if (!hour) hour = 12;
 

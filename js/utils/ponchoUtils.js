@@ -43,13 +43,13 @@ export function getDailyWeatherData() {
   })));
 }
 
-export function getCurrentWeather() {
-  return getHourlyPonchoData()
-  .then((hourlyData) => hourlyData[0])
-  .then((weatherInfo) => ({
-    icon: weatherInfo.icon,
-    temp: weatherInfo.temp_f,
-  }));
+export function getHourlyWeatherData() {
+  return getHourlyPonchoData().then((hourlyData) => hourlyData.map((hourData) => ({
+    icon: hourData.icon,
+    time: hourData.time * 1000,
+    temp: hourData.temp_f,
+    precipProb: hourData.precip_prob,
+  })));
 }
 
 export function getSeason() {
