@@ -44,6 +44,10 @@ body {
   border-radius: 10px;
 }
 
+.parent {
+  margin-bottom: -30px;
+}
+
 .precip-prob {
   padding-left: 10px;
 }
@@ -122,6 +126,19 @@ body {
     .img {
       height: 1em;
     }
+  }
+}
+
+.hourly-info {
+  position: relative;
+  height: 500px;
+
+  .rain-precip {
+    position: relative;
+    background-color: green;
+    top: 20%;
+    height: 80%;
+    width: 10px;
   }
 }
 

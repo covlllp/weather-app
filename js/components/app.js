@@ -98,7 +98,7 @@ export default class App extends React.Component {
         style={this.getBackgroundStyle()}
         id="app"
       >
-        <div className="flex">
+        <div className="flex parent">
           <Weather
             maxTemp={todaySummary.maxTemp}
             minTemp={todaySummary.minTemp}
@@ -108,7 +108,7 @@ export default class App extends React.Component {
           />
           <Time />
         </div>
-        <HourlyInfo hourData={today} />
+        <HourlyInfo hourData={today.slice(0, 30)} />
         <SmallWeather days={this.getFutureDays()} />
         <Poncho
           subject={ponchoData.subject}
