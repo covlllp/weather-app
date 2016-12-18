@@ -37,7 +37,7 @@ export default class WeatherInfo extends React.Component {
   renderPrecipProb() {
     return (
       <div className="weather-info__precip">
-        <i className="fa fa-tint fa-fw" aria-hidden="true"></i>
+        <i className="fa fa-tint fa-fw" aria-hidden="true" />
         <span className="precip-prob">
           {this.getRainProbability()}
         </span>

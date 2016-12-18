@@ -3,9 +3,32 @@ import React from 'react';
 import * as TimeUtils from 'js/utils/timeUtils';
 import * as MathUtils from 'js/utils/mathUtils';
 
-const tempOffset = 2;
+const tempOffset = 10;
 
 export default class HourlyInfo extends React.Component {
+  getTempStyle(hour) {
+    const maxTemp = this.getMaxTemp();
+    const minTemp = this.getMinTemp();
+    const tempDiff = maxTemp - minTemp;
+    const tempHeight = hour.temp - minTemp;
+    let tempPercent = tempHeight / tempDiff;
+    tempPercent *= 100;
+
+    return {
+      top: `${100 - tempPercent}%`,
+      height: `${tempPercent}%`,
+    };
+  }
+
+  getPrecipStyle(hour) {
+    let precipProb = hour.precipProb;
+    precipProb *= 100;
+
+    return {
+      top: `${100 - precipProb}%`,
+      height: `${precipProb}%`,
+    };
+  }
 
   getMinPrecip() {
     if (!this.props) return null;
@@ -27,40 +50,49 @@ export default class HourlyInfo extends React.Component {
     return MathUtils.getMaxValue(this.props.hourData.map((data) => data.temp)) + tempOffset;
   }
 
-  renderHour(hour) {
-    console.log(hour);
-    const maxTemp = this.getMaxTemp();
-    const minTemp = this.getMinTemp();
-    const tempDiff = maxTemp - minTemp;
-    const tempHeight = hour.temp - minTemp;
-    const tempPercent = tempHeight / tempDiff * 100;
-
-    const precipProb = hour.precipProb * 100;
-
-    const tempDivStyle = {
-      top: `${100 - tempPercent}%`,
-      height: `${tempPercent}%`,
-    };
-
-    const precipDivStyle = {
-      top: `${100 - precipProb}%`,
-      height: `${precipProb}%`,
-    };
-
+  renderHeader() {
     return (
       <div className="flex">
-        <div className="rain-precip" style={precipDivStyle} />
-        <div className="rain-precip" style={tempDivStyle} />
+        <div className="flex">
+          <div className="square yellow" />
+          <div className="side-pad">
+            Temperature
+          </div>
+        </div>
+        <div className="flex">
+          <div className="side-pad">
+            Precipitation
+          </div>
+          <div className="square blue" />
+        </div>
       </div>
     );
   }
 
-  render() {
-    const hours = this.props.hourData.map((hour) => this.renderHour(hour));
+  renderHour(hour) {
+    const tempDivStyle = this.getTempStyle(hour);
+    const precipDivStyle = this.getPrecipStyle(hour);
 
     return (
-      <div className="container hourly-info flex">
-        {hours}
+      <div className="flex">
+        <div className="rain-precip blue" style={precipDivStyle} />
+        <div className="rain-precip yellow" style={tempDivStyle} />
+      </div>
+    );
+  }
+
+  renderHours() {
+    const hours = this.props.hourData.map((hour) => this.renderHour(hour));
+    return hours;
+  }
+
+  render() {
+    return (
+      <div className="container hourly-info">
+        {this.renderHeader()}
+        <div className="hourly-info__hours flex">
+          {this.renderHours()}
+        </div>
       </div>
     );
   }

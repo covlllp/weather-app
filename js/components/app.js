@@ -108,7 +108,7 @@ export default class App extends React.Component {
           />
           <Time />
         </div>
-        <HourlyInfo hourData={today.slice(0, 30)} />
+        <HourlyInfo hourData={today.slice(0, 12)} />
         <SmallWeather days={this.getFutureDays()} />
         <Poncho
           subject={ponchoData.subject}

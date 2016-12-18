@@ -32,6 +32,23 @@ body {
   font-weight: 600;
 }
 
+.yellow {
+  background-color: #f3e369;
+}
+
+.blue {
+  background-color: #9fb0f3;
+}
+
+.square {
+  height: 40px;
+  width: 40px;
+}
+
+.side-pad {
+  padding: 0 15px;
+}
+
 .flex {
   display: flex;
   justify-content: space-between;
@@ -40,7 +57,7 @@ body {
 .container {
   margin: 30px;
   padding: 30px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
 
@@ -81,7 +98,7 @@ body {
 .poncho {
   position: absolute;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  // background-color: rgba(0, 0, 0, 0.4);
   padding-bottom: 50px;
 
   &__header {
@@ -130,14 +147,13 @@ body {
 }
 
 .hourly-info {
-  position: relative;
-  height: 500px;
+  &__hours {
+    position: relative;
+    height: 300px;
+  }
 
   .rain-precip {
     position: relative;
-    background-color: green;
-    top: 20%;
-    height: 80%;
     width: 10px;
   }
 }
