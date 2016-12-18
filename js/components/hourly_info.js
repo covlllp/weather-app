@@ -31,23 +31,27 @@ export default class HourlyInfo extends React.Component {
   }
 
   getMinPrecip() {
-    if (!this.props) return null;
+    if (!this.props || !this.props.hourData.length) return null;
     return MathUtils.getMinValue(this.props.hourData.map((data) => data.precipProb));
   }
 
   getMaxPrecip() {
-    if (!this.props) return null;
+    if (!this.props || !this.props.hourData.length) return null;
     return MathUtils.getMaxValue(this.props.hourData.map((data) => data.precipProb));
   }
 
   getMinTemp() {
-    if (!this.props) return null;
-    return MathUtils.getMinValue(this.props.hourData.map((data) => data.temp)) - tempOffset;
+    if (!this.props || !this.props.hourData.length) return null;
+    let minTemp = MathUtils.getMinValue(this.props.hourData.map((data) => data.temp));
+    minTemp -= tempOffset;
+    return Math.round(minTemp / 10) * 10;
   }
 
   getMaxTemp() {
-    if (!this.props) return null;
-    return MathUtils.getMaxValue(this.props.hourData.map((data) => data.temp)) + tempOffset;
+    if (!this.props || !this.props.hourData.length) return null;
+    let maxTemp = MathUtils.getMaxValue(this.props.hourData.map((data) => data.temp));
+    maxTemp += tempOffset;
+    return Math.round(maxTemp / 10) * 10;
   }
 
   renderHeader() {
@@ -86,12 +90,39 @@ export default class HourlyInfo extends React.Component {
     return hours;
   }
 
+  renderTempUnits() {
+    const labels = [];
+    let temp = this.getMaxTemp();
+    const minTemp = this.getMinTemp();
+    while (temp >= minTemp) {
+      labels.push(<div>{temp}</div>)
+        temp -= 10;
+    }
+
+    return (
+      <div className="flex flex-column labels">
+        {labels}
+      </div>
+    );
+  }
+
+  renderPrecipUnits() {
+    return (
+      <div className="flex flex-column labels">
+        <div>100%</div>
+        <div>0%</div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="container hourly-info">
         {this.renderHeader()}
         <div className="hourly-info__hours flex">
+          {this.renderTempUnits()}
           {this.renderHours()}
+          {this.renderPrecipUnits()}
         </div>
       </div>
     );

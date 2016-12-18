@@ -52,6 +52,10 @@ body {
 .flex {
   display: flex;
   justify-content: space-between;
+
+  &-column {
+    flex-direction: column;
+  }
 }
 
 .container {
@@ -98,7 +102,6 @@ body {
 .poncho {
   position: absolute;
   bottom: 0;
-  // background-color: rgba(0, 0, 0, 0.4);
   padding-bottom: 50px;
 
   &__header {
@@ -155,6 +158,10 @@ body {
   .rain-precip {
     position: relative;
     width: 10px;
+  }
+
+  .labels {
+
   }
 }
 

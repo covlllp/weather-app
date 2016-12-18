@@ -109,7 +109,6 @@ export default class App extends React.Component {
           <Time />
         </div>
         <HourlyInfo hourData={today.slice(0, 12)} />
-        <SmallWeather days={this.getFutureDays()} />
         <Poncho
           subject={ponchoData.subject}
           opener={ponchoData.opener}
@@ -119,4 +118,5 @@ export default class App extends React.Component {
       </div>
     );
   }
+  //<SmallWeather days={this.getFutureDays()} />
 }
