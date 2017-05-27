@@ -1,13 +1,13 @@
 var path = require('path');
 var webpack = require('webpack')
 
-var entryPath = './js/main.js';
+var entryPath = './js/main.jsx';
 var jsPath = path.join(__dirname, 'js');
 
 module.exports = {
   resolve: {
     root: __dirname,
-    extensions: ['', '.js', '.scss']
+    extensions: ['', '.js', '.jsx', '.scss']
   },
   entry: entryPath,
   output: {
