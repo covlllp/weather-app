@@ -39,11 +39,12 @@ body {
 }
 
 .square {
-  height: 1em;
-  width: 1em;
+  height: 0.75em;
+  width: 0.75em;
 }
 
 .side-pad {
+  font-size: 0.75em;
   padding: 0 15px;
 }
 
@@ -54,6 +55,10 @@ body {
   &-column {
     flex-direction: column;
   }
+
+  &.align-center {
+    align-items: center;
+  }
 }
 
 .container {
@@ -61,10 +66,6 @@ body {
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 10px;
-}
-
-.parent {
-  margin-bottom: -20px;
 }
 
 .weather {
@@ -139,6 +140,10 @@ body {
 }
 
 .hourly-info {
+  .header {
+    padding-bottom: 0.75em;
+  }
+
   &__hours {
     position: relative;
     height: 8em;
@@ -150,7 +155,7 @@ body {
   }
 
   .labels {
-
+    font-size: 0.75em;
   }
 }
 

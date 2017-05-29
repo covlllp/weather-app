@@ -55,14 +55,14 @@ export default class HourlyInfo extends React.Component {
 
   renderHeader() {
     return (
-      <div className="flex">
-        <div className="flex">
+      <div className="flex header">
+        <div className="flex align-center">
           <div className="square yellow" />
           <div className="side-pad">
             Temperature
           </div>
         </div>
-        <div className="flex">
+        <div className="flex align-center">
           <div className="side-pad">
             Precipitation
           </div>
@@ -109,6 +109,7 @@ export default class HourlyInfo extends React.Component {
     return (
       <div className="flex flex-column labels">
         <div>100%</div>
+        <div>50%</div>
         <div>0%</div>
       </div>
     );
