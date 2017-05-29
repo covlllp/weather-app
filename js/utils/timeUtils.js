@@ -67,3 +67,35 @@ export function getDayOfWeek(date, shorten = false) {
 export function getDateString(date) {
   return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
+
+export function getSeason() {
+  const month = new Date().getMonth();
+  if (month < 4) {
+    return 'winter';
+  } else if (month < 7) {
+    return 'spring';
+  } else if (month < 10) {
+    return 'summer';
+  } else if (month < 12) {
+    return 'autumn';
+  }
+  return 'winter';
+}
+
+export function getTimeOfDay() {
+  const hour = new Date().getHours();
+  if (hour < 6) {
+    return 'night';
+  } else if (hour < 9) {
+    return 'dawn';
+  } else if (hour < 17) {
+    return 'day';
+  } else if (hour < 21) {
+    return 'dusk';
+  }
+  return 'night';
+}
+
+export function getDayOrNight() {
+  return getTimeOfDay() === 'night' ? 'night' : 'day';
+}

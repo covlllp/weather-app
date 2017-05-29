@@ -4,84 +4,24 @@ import { PonchoConstants } from 'js/constants';
 
 const { url, location } = PonchoConstants;
 
-export function getMainPonchoData() {
-  const ponchoUrl = `${url}/${location}`;
-  return ajax(ponchoUrl).then((response) => response.data);
+const buildPonchoUrl = (route = '') => `${url}/${location}/${route}`;
+
+// Ajax functions
+export function fetchMainPonchoData() {
+  const ponchoUrl = buildPonchoUrl();
+  return ajax(ponchoUrl);
 }
 
-export function getDailyPonchoData() {
-  const ponchoUrl = `${url}/${location}/metrics/daily`;
-  return ajax(ponchoUrl).then((response) => response.data.series);
+
+export function fetchDailyPonchoData() {
+  const ponchoUrl = buildPonchoUrl('metrics/daily');
+  return ajax(ponchoUrl);
 }
 
-export function getHourlyPonchoData() {
-  const ponchoUrl = `${url}/${location}/metrics/hourly`;
-  return ajax(ponchoUrl).then((response) => response.data.series);
-}
 
-export function getInitialWeatherData() {
-  return getMainPonchoData().then((ponchoData) => ({
-    maxTemp: ponchoData.max_temp_f,
-    minTemp: ponchoData.min_temp_f,
-    weather: ponchoData.condition,
-    ponchoData: {
-      subject: ponchoData.subject,
-      opener: ponchoData.opener_f,
-      content: ponchoData.content_f,
-      media: ponchoData.media,
-    },
-  }));
-}
-
-export function getDailyWeatherData() {
-  return getDailyPonchoData().then((dailyData) => dailyData.map((day) => ({
-    time: day.time,
-    maxTemp: day.temp_max_f,
-    minTemp: day.temp_min_f,
-    icon: day.icon,
-    precipProb: day.precip_prob,
-  })));
-}
-
-export function getHourlyWeatherData() {
-  return getHourlyPonchoData().then((hourlyData) => hourlyData.map((hourData) => ({
-    icon: hourData.icon,
-    time: hourData.time * 1000,
-    temp: hourData.temp_f,
-    precipProb: hourData.precip_prob,
-  })));
-}
-
-export function getSeason() {
-  const month = new Date().getMonth();
-  if (month < 4) {
-    return 'winter';
-  } else if (month < 7) {
-    return 'spring';
-  } else if (month < 10) {
-    return 'summer';
-  } else if (month < 12) {
-    return 'autumn';
-  }
-  return 'winter';
-}
-
-export function getTimeOfDay() {
-  const hour = new Date().getHours();
-  if (hour < 6) {
-    return 'night';
-  } else if (hour < 9) {
-    return 'dawn';
-  } else if (hour < 17) {
-    return 'day';
-  } else if (hour < 21) {
-    return 'dusk';
-  }
-  return 'night';
-}
-
-export function getDayOrNight() {
-  return getTimeOfDay() === 'night' ? 'night' : 'day';
+export function fetchHourlyPonchoData() {
+  const ponchoUrl = buildPonchoUrl('metrics/hourly');
+  return ajax(ponchoUrl);
 }
 
 const IconMap = {

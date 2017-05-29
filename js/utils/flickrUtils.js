@@ -4,28 +4,21 @@ import { FlickrConstants } from 'js/constants';
 import keys from 'js/secrets/keys';
 
 function buildUrl(options) {
-  const urlOptions = options;
-  let url = FlickrConstants.restUrl;
-  if (!urlOptions.format) {
-    urlOptions.format = 'json';
-  }
-  if (!urlOptions.api_key) {
-    urlOptions.api_key = keys.FLICKR_KEY;
-  }
-  Object.keys(urlOptions).forEach((key) => {
-    url = `${url}&${key}=${urlOptions[key]}`;
-  });
-  return url.replace('&', '?');
+  Object.assign(options, { format: 'json', api_key: keys.FLICKR_KEY });
+  const builtUrl = Object.keys(options).reduce((url, key) => (
+    `${url}&${key}=${options[key]}`
+  ), FlickrConstants.url);
+  return builtUrl.replace('&', '?');
 }
 
 function jsonFlickrApi(response) {
   return response;
 }
 
-export function getGroupId(groupName) {
+export function getGroupId() {
   const urlOptions = {
     method: 'flickr.groups.search',
-    text: groupName,
+    text: FlickrConstants.groupId,
   };
   const url = buildUrl(urlOptions);
 
@@ -56,4 +49,3 @@ export function getRandomImageUrl(groupId, tags) {
     return getImageUrl(photo);
   });
 }
-

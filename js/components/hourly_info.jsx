@@ -1,6 +1,5 @@
 import React from 'react';
 
-import * as TimeUtils from 'js/utils/timeUtils';
 import * as MathUtils from 'js/utils/mathUtils';
 
 const tempOffset = 10;
@@ -95,8 +94,8 @@ export default class HourlyInfo extends React.Component {
     let temp = this.getMaxTemp();
     const minTemp = this.getMinTemp();
     while (temp >= minTemp) {
-      labels.push(<div>{temp}</div>)
-        temp -= 10;
+      labels.push(<div>{temp}</div>);
+      temp -= 10;
     }
 
     return (

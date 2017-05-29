@@ -1,5 +1,6 @@
 export const FlickrConstants = {
-  restUrl: 'https://api.flickr.com/services/rest/',
+  url: 'https://api.flickr.com/services/rest/',
+  groupId: 'Project Weather',
 };
 
 export const PonchoConstants = {
@@ -7,13 +8,7 @@ export const PonchoConstants = {
   location: 11103,
 };
 
-export const NewsConstants = {
-  url: 'https://api.nytimes.com/svc/topstories/v2/home.json',
-  maxItems: 10,
-};
-
 export default {
   FlickrConstants,
   PonchoConstants,
-  NewsConstants,
 };
