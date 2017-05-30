@@ -3,24 +3,24 @@ import React from 'react';
 import { getIconSrc } from 'js/utils/ponchoUtils';
 import { getDayOfWeek } from 'js/utils/timeUtils';
 
-export default class WeatherInfo extends React.Component {
-  getRainProbability() {
+export default class WeatherDay extends React.Component {
+  getPrecipProbPercent() {
     return `${this.props.precipProb}%`;
   }
 
   renderIcon() {
     const { icon } = this.props;
     return (
-      <div className="weather-info__icon">
+      <div className="icon">
         <img src={getIconSrc(icon)} alt={icon} className="img" />
       </div>
     );
   }
 
-  renderTimeOfWeek() {
+  renderDayOfWeek() {
     const dayOfWeek = getDayOfWeek(this.props.time * 1000, true);
     return (
-      <div className="weather-info__tow">
+      <div className="dow font-bold">
         {dayOfWeek}
       </div>
     );
@@ -28,49 +28,53 @@ export default class WeatherInfo extends React.Component {
 
   renderMaxTemp() {
     return (
-      <div className="weather-info__max font-bold">
+      <div className="max-temp font-bold font-small">
         {this.props.maxTemp}
-      </div>
-    );
-  }
-
-  renderPrecipProb() {
-    return (
-      <div className="weather-info__precip">
-        <i className="fa fa-tint fa-fw" aria-hidden="true" />
-        <span className="precip-prob">
-          {this.getRainProbability()}
-        </span>
       </div>
     );
   }
 
   renderMinTemp() {
     return (
-      <div className="weather-info__min">
+      <div className="min-temp font-small">
         {this.props.minTemp}
+      </div>
+    );
+  }
+
+  renderPrecipProb() {
+    return (
+      <div className="rain font-small">
+        <i className="fa fa-tint" aria-hidden="true" />
+        <span className="precip">
+          {this.getPrecipProbPercent()}
+        </span>
       </div>
     );
   }
 
   render() {
     return (
-      <div className="weather-info flex">
-        {this.renderTimeOfWeek()}
+      <div className="weather-day flex flex-column">
+        {this.renderDayOfWeek()}
         {this.renderIcon()}
-        {this.renderMaxTemp()}
-        {this.renderMinTemp()}
+        <div className="flex space-around temps">
+          {this.renderMaxTemp()}
+          {this.renderMinTemp()}
+        </div>
         {this.renderPrecipProb()}
       </div>
     );
   }
 }
 
-WeatherInfo.propTypes = {
+export const dailyPropShape = {
   time: React.PropTypes.number,
   icon: React.PropTypes.string,
   maxTemp: React.PropTypes.number,
   minTemp: React.PropTypes.number,
   precipProb: React.PropTypes.number,
 };
+
+WeatherDay.propTypes = dailyPropShape;
 

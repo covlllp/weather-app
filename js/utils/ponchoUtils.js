@@ -28,6 +28,7 @@ const IconMap = {
   'clear-day': 'weather-clear',
   'clear-night': 'weather-clear-night',
   cloudy: 'weather-clouds',
+  fog: 'weather-fog',
   'partly-cloudy-day': 'weather-few-clouds',
   'partly-cloudy-night': 'weather-few-clouds-night',
   'light-rain': 'weather-drizzle-day',

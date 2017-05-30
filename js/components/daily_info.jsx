@@ -1,11 +1,11 @@
 import React from 'react';
 
-import WeatherInfo from 'js/components/weather_info';
+import WeatherDay from 'js/components/weather_day';
 
-export default class SmallWeather extends React.Component {
+export default class DailyInfo extends React.Component {
   renderDays() {
     return this.props.days.map((day, index) => (
-      <WeatherInfo
+      <WeatherDay
         time={day.time}
         icon={day.icon}
         maxTemp={day.maxTemp}
@@ -17,14 +17,16 @@ export default class SmallWeather extends React.Component {
   }
 
   render() {
+    if (!this.props.days.length) return null;
+
     return (
-      <div className="container future">
+      <div className="container daily-info flex">
         {this.renderDays()}
       </div>
     );
   }
 }
 
-SmallWeather.propTypes = {
-  days: React.PropTypes.array,
+DailyInfo.propTypes = {
+  days: React.PropTypes.arrayOf(React.PropTypes.shape(WeatherDay.propTypes)),
 };

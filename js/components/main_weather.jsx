@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getIconSrc } from 'js/utils/ponchoUtils';
 
-export default class Weather extends React.Component {
+export default class MainWeather extends React.Component {
   getRainProbability() {
     const rainPercentage = Math.round(this.props.precipProb * 100);
     return `${rainPercentage}%`;
@@ -13,7 +13,7 @@ export default class Weather extends React.Component {
     if (!icon) return null;
 
     return (
-      <div className="weather__icon">
+      <div className="icon">
         <img src={getIconSrc(icon)} alt={icon} />
       </div>
     );
@@ -21,11 +21,11 @@ export default class Weather extends React.Component {
 
   renderHighLow() {
     return (
-      <div className="info__high-low">
-        <span className="info__high font-bold">
+      <div className="high-low">
+        <span className="high font-bold">
           {this.props.maxTemp}
         </span>
-        <span className="info__low">
+        <span className="low">
           {this.props.minTemp}
         </span>
       </div>
@@ -35,13 +35,14 @@ export default class Weather extends React.Component {
   renderInfo() {
     const currentTemp = `${this.props.currentTemp}\u00B0`;
     return (
-      <div className="weather__info info">
-        <div className="info__temp font-large font-bold">
+      <div className="info flex flex-column">
+        <div className="temp font-large font-bold">
           {currentTemp}
         </div>
         {this.renderHighLow()}
-        <div className="info__rain">
-          <span className="info__prob precip-prob">
+        <div className="rain">
+          <i className="fa fa-tint" aria-hidden="true" />
+          <span className="precip">
             {this.getRainProbability()}
           </span>
         </div>
@@ -61,7 +62,7 @@ export default class Weather extends React.Component {
 
 }
 
-Weather.propTypes = {
+MainWeather.propTypes = {
   maxTemp: React.PropTypes.number,
   minTemp: React.PropTypes.number,
   currentTemp: React.PropTypes.number,

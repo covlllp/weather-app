@@ -1,3 +1,5 @@
+$padding: 20px;
+
 html {
   box-sizing: border-box;
 }
@@ -22,12 +24,18 @@ body {
   position: relative;
 }
 
-.font-large {
-  font-size: 25pt;
-}
+.font {
+  &-large {
+    font-size: 1.25em;
+  }
 
-.font-bold {
-  font-weight: 600;
+  &-small {
+    font-size: 0.75em;
+  }
+
+  &-bold {
+    font-weight: 600;
+  }
 }
 
 .yellow {
@@ -43,11 +51,6 @@ body {
   width: 0.75em;
 }
 
-.side-pad {
-  font-size: 0.75em;
-  padding: 0 15px;
-}
-
 .flex {
   display: flex;
   justify-content: space-between;
@@ -59,28 +62,37 @@ body {
   &.align-center {
     align-items: center;
   }
+
+  &.space-around {
+    justify-content: center;
+  }
 }
 
 .container {
-  margin: 20px;
-  padding: 20px;
+  margin: $padding;
+  padding: $padding;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 10px;
 }
 
+.parent {
+  margin-bottom: -$padding;
+}
+
+.precip {
+  padding-left: 0.5em;
+}
+
 .weather {
   .info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-left: 30px;
+    padding-left: $padding;
 
-    &__high {
-      padding-right: 20px;
+    .high {
+      padding-right: $padding;
     }
   }
 
-  &__icon {
+  .icon {
     img {
       height: 4em;
       width: 4em;
@@ -91,10 +103,10 @@ body {
 .poncho {
   position: absolute;
   bottom: 0;
-  padding-bottom: 50px;
+  padding-bottom: 2*$padding;
 
   &__header {
-    padding-bottom: 20px;
+    padding-bottom: $padding;
     text-align: center;
   }
 
@@ -114,29 +126,6 @@ body {
 
 .time {
   text-align: right;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  &__date {
-    line-height: 1.3em;
-  }
-}
-
-.future {
-  width: 57%;
-}
-
-.weather-info {
-  &__tow {
-    width: 20%;
-  }
-
-  &__icon {
-    .img {
-      height: 1em;
-    }
-  }
 }
 
 .hourly-info {
@@ -146,7 +135,7 @@ body {
 
   &__hours {
     position: relative;
-    height: 8em;
+    height: 6em;
   }
 
   .rain-precip {
@@ -154,8 +143,26 @@ body {
     width: 10px;
   }
 
-  .labels {
-    font-size: 0.75em;
+  .side-pad {
+    padding: 0 15px;
   }
 }
 
+.weather-day {
+  text-align: center;
+  .icon {
+    padding: 5px 0;
+    img {
+      width: 50%;
+      height: 50%;
+    }
+  }
+
+  .temps {
+    line-height: 1.1em;
+  }
+
+  .max-temp {
+    padding-right: 0.75em;
+  }
+}

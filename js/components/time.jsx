@@ -47,7 +47,7 @@ export default class Time extends React.Component {
 
   render() {
     return (
-      <div className="container time">
+      <div className="container time flex flex-column">
         {this.renderDate()}
         {this.renderTime()}
       </div>

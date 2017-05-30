@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 
 import { dispatchActions } from 'js/actions';
 
-import Weather from 'js/components/weather';
-import HourlyInfo from 'js/components/hourly_info';
+import MainWeather from 'js/components/main_weather';
+import DailyInfo from 'js/components/daily_info';
+import { dailyPropShape } from 'js/components/weather_day';
+import HourlyInfo, { hourlyPropShape } from 'js/components/hourly_info';
 import Poncho from 'js/components/poncho';
 import Time from 'js/components/time';
 
@@ -60,14 +62,14 @@ class App extends React.Component {
 
   render() {
     const { today } = this;
-    const { poncho, hourly } = this.props;
+    const { poncho, hourly, daily } = this.props;
     return (
       <div
         style={this.getBackgroundStyle()}
         id="app"
       >
         <div className="flex parent">
-          <Weather
+          <MainWeather
             maxTemp={today.maxTemp}
             minTemp={today.minTemp}
             currentTemp={today.currentTemp}
@@ -76,6 +78,7 @@ class App extends React.Component {
           />
           <Time />
         </div>
+        <DailyInfo days={daily.slice(0, 5)} />
         <HourlyInfo hourData={hourly.slice(0, 12)} />
         <Poncho
           subject={poncho.subject}
@@ -92,8 +95,8 @@ App.propTypes = {
   actions: pt.objectOf(pt.func),
   today: pt.object,
   poncho: pt.object,
-  daily: pt.arrayOf(pt.object),
-  hourly: pt.arrayOf(pt.object),
+  daily: pt.arrayOf(pt.shape(dailyPropShape)),
+  hourly: pt.arrayOf(pt.shape(hourlyPropShape)),
   background: pt.string,
 };
 

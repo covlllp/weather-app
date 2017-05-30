@@ -58,12 +58,12 @@ export default class HourlyInfo extends React.Component {
       <div className="flex header">
         <div className="flex align-center">
           <div className="square yellow" />
-          <div className="side-pad">
+          <div className="side-pad font-small">
             Temperature
           </div>
         </div>
         <div className="flex align-center">
-          <div className="side-pad">
+          <div className="side-pad font-small">
             Precipitation
           </div>
           <div className="square blue" />
@@ -99,7 +99,7 @@ export default class HourlyInfo extends React.Component {
     }
 
     return (
-      <div className="flex flex-column labels">
+      <div className="flex flex-column labels font-small">
         {labels}
       </div>
     );
@@ -107,7 +107,7 @@ export default class HourlyInfo extends React.Component {
 
   renderPrecipUnits() {
     return (
-      <div className="flex flex-column labels">
+      <div className="flex flex-column labels font-small">
         <div>100%</div>
         <div>50%</div>
         <div>0%</div>
@@ -129,10 +129,12 @@ export default class HourlyInfo extends React.Component {
   }
 }
 
+export const hourlyPropShape = {
+  precipProb: React.PropTypes.number,
+  temp: React.PropTypes.number,
+  time: React.PropTypes.number,
+};
+
 HourlyInfo.propTypes = {
-  hourData: React.PropTypes.arrayOf(React.PropTypes.shape({
-    precipProb: React.PropTypes.number,
-    temp: React.PropTypes.number,
-    time: React.PropTypes.number,
-  })),
+  hourData: React.PropTypes.arrayOf(React.PropTypes.shape(hourlyPropShape)),
 };

@@ -25,7 +25,7 @@ const deserializeMainPonchoResponse = response => response.data;
 const deserializeSeriesPonchoResponse = response => response.data.series;
 const deserializePonchoDescription = data => ({
   subject: data.subject,
-  opener: data.opender_f,
+  opener: data.opener_f,
   content: data.content_f,
   media: data.media,
 });
