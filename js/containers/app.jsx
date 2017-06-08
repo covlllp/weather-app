@@ -40,8 +40,12 @@ class App extends React.Component {
       this.props.actions.fetchMainPonchoData(),
       this.props.actions.fetchDailyPonchoData(),
       this.props.actions.fetchHourlyPonchoData(),
+      this.props.actions.fetchFlickrGroupId(),
     ]).then(() => {
-      this.props.actions.setBackgroundImage(this.props.today.weather);
+      this.props.actions.setBackgroundImage({
+        weather: this.props.today.weather,
+        groupId: this.props.flickrId,
+      });
     });
   }
 
@@ -98,6 +102,7 @@ App.propTypes = {
   daily: pt.arrayOf(pt.shape(dailyPropShape)),
   hourly: pt.arrayOf(pt.shape(hourlyPropShape)),
   background: pt.string,
+  flickrId: pt.string,
 };
 
 const mapStateToProps = state => state;

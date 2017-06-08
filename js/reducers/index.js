@@ -16,6 +16,9 @@ actionMap[actions.SET_DAILY_INFO] = (state, action) => (
 actionMap[actions.SET_HOURLY_INFO] = (state, action) => (
   Object.assign({}, state, { hourly: action.payload })
 );
+actionMap[actions.SET_FLICKR_GROUP_ID] = (state, action) => (
+  Object.assign({}, state, { flickrId: action.payload })
+);
 actionMap[actions.SET_IMAGE] = (state, action) => (
   Object.assign({}, state, { background: action.payload })
 );
@@ -26,6 +29,7 @@ const reducer = handleActions(actionMap, {
   daily: [],
   hourly: [],
   background: null,
+  flickrId: null,
 });
 
 export default reducer;

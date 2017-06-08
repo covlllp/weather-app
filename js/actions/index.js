@@ -7,6 +7,7 @@ import * as TimeUtils from 'js/utils/timeUtils';
 export const actions = {
   SET_IMAGE: 'SET_IMAGE',
   SET_DAILY_INFO: 'SET_DAILY_INFO',
+  SET_FLICKR_GROUP_ID: 'SET_FLICKR_GROUP_ID',
   SET_HOURLY_INFO: 'SET_HOURLY_INFO',
   SET_PONCHO_DESCRIPTION: 'SET_PONCHO_DESCRIPTION',
   SET_TODAY_INFO: 'SET_TODAY_INFO',
@@ -15,6 +16,7 @@ export const actions = {
 const {
   setImage,
   setDailyInfo,
+  setFlickrGroupId,
   setHourlyInfo,
   setPonchoDescription,
   setTodayInfo,
@@ -76,16 +78,20 @@ function fetchHourlyPonchoData(dispatch) {
   });
 }
 
-function setBackgroundImage(dispatch, weather) {
-  return FlickrUtils.getGroupId()
-  .then(groupId => {
-    const tags = [
-      weather,
-      TimeUtils.getSeason(),
-      TimeUtils.getTimeOfDay(),
-    ];
-    return FlickrUtils.getRandomImageUrl(groupId, tags);
-  }).then(imageUrl => {
+function fetchFlickrGroupId(dispatch) {
+  return FlickrUtils.getGroupId().then(groupId => {
+    dispatch(setFlickrGroupId(groupId));
+  });
+}
+
+function setBackgroundImage(dispatch, { weather, groupId }) {
+  const tags = [
+    weather,
+    TimeUtils.getSeason(),
+    TimeUtils.getTimeOfDay(),
+  ];
+  return FlickrUtils.getRandomImageUrl(groupId, tags)
+  .then(imageUrl => {
     dispatch(setImage(imageUrl));
   });
 }
@@ -94,5 +100,6 @@ export const dispatchActions = {
   fetchMainPonchoData,
   fetchDailyPonchoData,
   fetchHourlyPonchoData,
+  fetchFlickrGroupId,
   setBackgroundImage,
 };
