@@ -78,8 +78,8 @@ export default class HourlyInfo extends React.Component {
 
     return (
       <div className="flex">
-        <div className="rain-precip blue" style={precipDivStyle} />
-        <div className="rain-precip yellow" style={tempDivStyle} />
+        <div className="probability blue" style={precipDivStyle} />
+        <div className="probability yellow" style={tempDivStyle} />
       </div>
     );
   }

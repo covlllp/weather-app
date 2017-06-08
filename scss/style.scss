@@ -1,4 +1,4 @@
-$padding: 20px;
+$padding: 3vmin;
 
 html {
   box-sizing: border-box;
@@ -9,9 +9,9 @@ html {
 
 body {
   margin: 0;
-  font-family: "roboto", "helvetica neue", helvetica, arial, sans-serif;
+  font-family: roboto;
   font-weight: 200;
-  font-size: 20pt;
+  font-size: 4vmin;
   color: white;
 }
 
@@ -72,7 +72,7 @@ body {
   margin: $padding;
   padding: $padding;
   background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 10px;
+  border-radius: 2vmin;
 }
 
 .parent {
@@ -103,6 +103,8 @@ body {
 .poncho {
   position: absolute;
   bottom: 0;
+  left: 0;
+  right: 0;
   padding-bottom: 2*$padding;
 
   &__header {
@@ -111,7 +113,7 @@ body {
   }
 
   &__opener, &__content {
-    padding-bottom: 15px;
+    padding-bottom: 0.75em;
   }
 
   &__media {
@@ -138,20 +140,20 @@ body {
     height: 6em;
   }
 
-  .rain-precip {
+  .probability {
     position: relative;
-    width: 10px;
+    width: 1.5vw;
   }
 
   .side-pad {
-    padding: 0 15px;
+    padding: 0 0.5em;
   }
 }
 
 .weather-day {
   text-align: center;
   .icon {
-    padding: 5px 0;
+    padding: 0.1em 0;
     img {
       width: 50%;
       height: 50%;
