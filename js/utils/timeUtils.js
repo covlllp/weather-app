@@ -20,6 +20,15 @@ export function getTimeString(date) {
   return `${hour}:${minute} ${amOrPm}`;
 }
 
+export function getShortTimeString(date) {
+  const dateObj = new Date(date);
+  let hour = dateObj.getHours();
+  const amOrPm = hour >= 12 ? 'pm' : 'am';
+  hour %= 12;
+  if (!hour) hour = 12;
+  return `${hour}${amOrPm}`;
+}
+
 const shortDaysOfWeek = [
   'Sun',
   'Mon',

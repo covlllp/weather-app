@@ -1,8 +1,9 @@
 import React from 'react';
 
 import * as MathUtils from 'js/utils/mathUtils';
+import { getShortTimeString } from 'js/utils/timeUtils';
 
-const tempOffset = 10;
+const TEMP_OFFSET = 2;
 
 export default class HourlyInfo extends React.Component {
   getTempStyle(hour) {
@@ -42,14 +43,14 @@ export default class HourlyInfo extends React.Component {
   getMinTemp() {
     if (!this.props || !this.props.hourData.length) return null;
     let minTemp = MathUtils.getMinValue(this.props.hourData.map((data) => data.temp));
-    minTemp -= tempOffset;
+    minTemp -= TEMP_OFFSET;
     return Math.round(minTemp / 10) * 10;
   }
 
   getMaxTemp() {
     if (!this.props || !this.props.hourData.length) return null;
     let maxTemp = MathUtils.getMaxValue(this.props.hourData.map((data) => data.temp));
-    maxTemp += tempOffset;
+    maxTemp += TEMP_OFFSET;
     return Math.round(maxTemp / 10) * 10;
   }
 
@@ -77,9 +78,20 @@ export default class HourlyInfo extends React.Component {
     const precipDivStyle = this.getPrecipStyle(hour);
 
     return (
-      <div className="flex">
-        <div className="probability blue" style={precipDivStyle} />
-        <div className="probability yellow" style={tempDivStyle} />
+      <div>
+        <div className="flex hour justify-center">
+          <div className="probability blue" style={precipDivStyle} />
+          <div className="probability yellow" style={tempDivStyle} />
+        </div>
+        {this.renderHourUnit(hour)}
+      </div>
+    );
+  }
+
+  renderHourUnit(hour) {
+    return (
+      <div className="font-extra-small">
+        {getShortTimeString(hour.time)}
       </div>
     );
   }

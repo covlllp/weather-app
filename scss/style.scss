@@ -33,6 +33,10 @@ body {
     font-size: 0.75em;
   }
 
+  &-extra-small {
+    font-size: 0.5em;
+  }
+
   &-bold {
     font-weight: 600;
   }
@@ -63,7 +67,7 @@ body {
     align-items: center;
   }
 
-  &.space-around {
+  &.justify-center {
     justify-content: center;
   }
 }
@@ -131,8 +135,14 @@ body {
 }
 
 .hourly-info {
+  padding-bottom: 5vmin;
+
   .header {
     padding-bottom: 0.75em;
+  }
+
+  .hour {
+    height: 100%;
   }
 
   &__hours {

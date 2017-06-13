@@ -58,7 +58,7 @@ export default class WeatherDay extends React.Component {
       <div className="weather-day flex flex-column">
         {this.renderDayOfWeek()}
         {this.renderIcon()}
-        <div className="flex space-around temps">
+        <div className="flex justify-center temps">
           {this.renderMaxTemp()}
           {this.renderMinTemp()}
         </div>
