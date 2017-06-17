@@ -3,7 +3,7 @@ import React from 'react';
 import * as MathUtils from 'js/utils/mathUtils';
 import { getShortTimeString } from 'js/utils/timeUtils';
 
-const TEMP_OFFSET = 2;
+const TEMP_OFFSET = 5;
 
 export default class HourlyInfo extends React.Component {
   getTempStyle(hour) {
